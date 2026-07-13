@@ -1,6 +1,6 @@
-# BomberGameX Using Rust Project
+# BomberGameY Using Rust Project
 
-This repository hosts a small BomberGameX inspired tournament runner written in Rust.
+This repository hosts a small BomberGameY inspired tournament runner written in Rust.
 It serves as a playground to explore the language while incrementally adopting the architecture described in [`Docs/architecture`](Docs/Architecture.md).
 
 ## Running
