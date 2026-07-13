@@ -6,7 +6,7 @@ use crossterm::event::{self, Event, KeyCode};
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
-    println!("🎮 Starting Bomberman Tournament Engine...");
+    println!("🎮 Starting BomberArena Tournament Engine...");
     
     let config_path = std::env::args()
         .nth(1)
@@ -50,7 +50,7 @@ async fn run_interactive_game(
     // Get reference to the actual game grid from the engine
     let grid = engine.grid();
     
-    println!("🎮 Starting interactive Bomberman game!");
+    println!("🎮 Starting interactive BomberArena game!");
     println!("Controls: SPACE=pause/resume, R=restart, Q=quit");
     println!("Press any key to start...");
     
@@ -120,7 +120,7 @@ async fn run_interactive_game(
     
     // Restore terminal
     display.restore_terminal()?;
-    println!("\n🎮 Thanks for playing Bomberman Tournament!");
+    println!("\n🎮 Thanks for playing BomberArena Tournament!");
     Ok(())
 }
 

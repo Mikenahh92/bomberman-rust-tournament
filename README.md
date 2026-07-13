@@ -1,6 +1,6 @@
-# Bomberman Using Rust Project
+# BomberArena Using Rust Project
 
-This repository hosts a small Bomberman inspired tournament runner written in Rust.
+This repository hosts a small BomberArena inspired tournament runner written in Rust.
 It serves as a playground to explore the language while incrementally adopting the architecture described in [`Docs/architecture`](Docs/Architecture.md).
 
 ## Running
