@@ -1,6 +1,6 @@
-# BomberGame Using Rust Project
+# Bombertest Using Rust Project
 
-This repository hosts a small BomberGame inspired tournament runner written in Rust.
+This repository hosts a small Bombertest inspired tournament runner written in Rust.
 It serves as a playground to explore the language while incrementally adopting the architecture described in [`Docs/architecture`](Docs/Architecture.md).
 
 ## Running

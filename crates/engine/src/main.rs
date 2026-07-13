@@ -6,25 +6,25 @@ use crossterm::event::{self, Event, KeyCode};
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
-    println!("🎮 Starting BomberGame Tournament Engine...");
-    
+    println!("🎮 Starting Bombertest Tournament Engine...");
+
     let config_path = std::env::args()
         .nth(1)
         .unwrap_or_else(|| "config/default.toml".to_string());
     println!("📁 Loading config from: {}", config_path);
-    
+
     let mut config = UnifiedConfig::from_file(&config_path)?;
     config = config.with_env_overrides()?;
     println!("✅ Configuration loaded successfully");
     println!("🔧 Engine config: {}x{} grid, {} bots", config.engine.width, config.engine.height, config.bots.len());
     info!("Loaded configuration from {}", config_path);
-    
+
     println!("🔧 Initializing system...");
     let mut initializer = SystemInitializer::new(config.clone());
     let handle = initializer.initialize().await?;
     println!("✅ System initialized successfully");
     info!("System initialized successfully");
-    
+
     if handle.has_tournament() {
         println!("🏆 Running tournament mode");
         run_tournament(handle).await?;
@@ -37,30 +37,30 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 async fn run_interactive_game(
-    handle: engine::SystemHandle, 
-    width: usize, 
+    handle: engine::SystemHandle,
+    width: usize,
     height: usize
 ) -> Result<(), Box<dyn std::error::Error>> {
     let mut engine = handle.into_engine();
     let display = GameDisplay::new(width, height);
-    
+
     // Initialize terminal
     display.init_terminal()?;
-    
+
     // Get reference to the actual game grid from the engine
     let grid = engine.grid();
-    
-    println!("🎮 Starting interactive BomberGame game!");
+
+    println!("🎮 Starting interactive Bombertest game!");
     println!("Controls: SPACE=pause/resume, R=restart, Q=quit");
     println!("Press any key to start...");
-    
+
     // Wait for user input to start
     wait_for_keypress().await?;
-    
+
     let game_running = true;
     let mut paused = false;
     let mut tick_count = 0;
-    
+
     // Game loop
     while game_running {
         // Handle input
@@ -83,19 +83,19 @@ async fn run_interactive_game(
                 }
             }
         }
-        
+
         // Update game state if not paused
         if !paused {
             // Run game tick
             engine.tick().await?;
             tick_count += 1;
-            
+
             // Display game info
             display.render(&grid)?;
-            
+
             // Add delay for visibility
             tokio::time::sleep(Duration::from_millis(200)).await;
-            
+
             // Check for game end conditions
             if let Some(winner) = engine.check_game_end() {
                 if winner == usize::MAX {
@@ -105,7 +105,7 @@ async fn run_interactive_game(
                 }
                 break;
             }
-            
+
             // Stop after reasonable number of ticks for demo (if no winner)
             if tick_count >= 100 {
                 info!("Demo completed after {} ticks", tick_count);
@@ -117,10 +117,10 @@ async fn run_interactive_game(
             tokio::time::sleep(Duration::from_millis(100)).await;
         }
     }
-    
+
     // Restore terminal
     display.restore_terminal()?;
-    println!("\n🎮 Thanks for playing BomberGame Tournament!");
+    println!("\n🎮 Thanks for playing Bombertest Tournament!");
     Ok(())
 }
 
@@ -176,4 +176,3 @@ async fn wait_for_keypress() -> Result<(), Box<dyn std::error::Error>> {
     }
     Ok(())
 }
-
